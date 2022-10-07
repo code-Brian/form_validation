@@ -90,29 +90,75 @@ export const Form = () => {
         })
     }
 
+    const handleLastName = (e) => {
+        if(e.target.value.length < 2){
+            dispatch({
+                type: "SET_LASTNAME_ERROR",
+                payload: "Last name must be at least 2 characters!"
+            })
+        } else {
+            dispatch({
+                type: "SET_LASTNAME_ERROR",
+                payload: ""
+            })
+        }
+        dispatch({
+            type: "SET_LASTNAME_VALUE",
+            payload: e.target.value
+        })
+    }
+
+    const handleEmail = (e) => {
+        if(e.target.value.length < 5) {
+            dispatch({
+                type: "SET_EMAIL_ERROR",
+                payload: "Email must be at least 5 characters!"
+            })
+        } else {
+            dispatch({
+                type: "SET_EMAIL_ERROR",
+                payload: ""
+            })
+        }
+        dispatch({
+            type: "SET_EMAIL_VALUE",
+            payload: e.target.value
+        })
+    }
+
     return (
         <div>
             <form>
                 <div>
                     <label>First Name:</label>
-                    <input typle="text" onChange={(e)=> handleFirstName(e)}></input>
-                </div>
+                    <input type="text" onChange={(e)=> handleFirstName(e)}></input>
+                </div>  
                 {
                     state.firstName.error ?
                     <p>{ state.firstName.error }</p> : null
                 }
                 <div>
                     <label>Last Name:</label>
-
+                    <input type="text" onChange={(e)=> handleLastName(e)}></input>
                 </div>
+                {
+                    state.lastName.error ?
+                    <p>{ state.lastName.error }</p> : null
+                }
                 <div>
                     <label>Email:</label>
-
+                    <input type="text" onChange={(e)=> handleEmail(e)}></input>
                 </div>
+                {
+                    state.email.error ?
+                    <p>{ state.email.error }</p> : null
+                }
             </form>
-            <div>
+            <div>   
                 <ul>
                     <li>First Name: { state.firstName.value }</li>
+                    <li>Last Name: { state.lastName.value }</li>
+                    <li>Email: { state.email.value }</li>
                 </ul>
             </div>
         </div>
